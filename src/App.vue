@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useFetchJSON } from './hooks/useFetchJSON'
+import { publicPath } from './lib/setting'
 
 const query = ref('')
 const inputValue = ref('')
+
+const pkmnURL = new URL('pkmn.json', publicPath).href
+const pkmn = useFetchJSON<Pokemon[]>(pkmnURL)
 function onsubmit() {
   if (inputValue.value) {
     query.value = inputValue.value
+    console.log(pkmn)
     inputValue.value = ''
   }
 }
