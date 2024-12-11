@@ -33,9 +33,15 @@ function onsubmit() {
 			/>
 		</form>
 	</header>
-	<template v-for="(prompt, i) in prompts" :key="i">
-		<p >{{ prompt }}</p>
-	</template>
+	<section class="overflow-y-scroll" id="section">
+		<template v-for="(prompt, i) in prompts" :key="i">
+			<p >{{ prompt }}</p>
+		</template>
+	</section>
 </template>
 
-<style scoped></style>
+<style scoped>
+#section {
+	height: calc(100% - 24px);
+}
+</style>
