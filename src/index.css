@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: black;
+  color: white;
+  font-family: Consolas;
+  font-size: 16px;
+}
+
+#app {
+  padding: 4px 8px;
+}
+
+input:focus-visible {
+  outline: none;
+}
