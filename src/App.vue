@@ -2,16 +2,19 @@
 import { ref } from 'vue'
 import pkmn from "./pkmn.json"
 
-const output = ref('')
+const prompts = ref<Array<string>>([])
 const inputValue = ref('')
 
-function getOutput(input: string): string{
-	return pkmn.find((pokemon) => {return pokemon.name === input})?.types.join(" ") ?? "No result"
+function getPokeTypes(query: string): Array<string>| undefined{
+	return pkmn.find((pokemon) => {return pokemon.name === query})?.types
 }
 
 function onsubmit() {
 	if (inputValue.value) {
-		output.value = getOutput(inputValue.value.toLowerCase())
+		const query = inputValue.value.toLowerCase()
+		const types = getPokeTypes(query)
+		if (types) prompts.value.push(types.join(" "))
+			else prompts.value.push("no result")
 		inputValue.value = ''
 	}
 }
@@ -30,9 +33,9 @@ function onsubmit() {
 			/>
 		</form>
 	</header>
-	<section>
-		<p>{{ output }}</p>
-	</section>
+	<template v-for="(prompt, i) in prompts" :key="i">
+		<p >{{ prompt }}</p>
+	</template>
 </template>
 
 <style scoped></style>
