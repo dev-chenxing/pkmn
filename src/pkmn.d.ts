@@ -14,5 +14,5 @@ interface Pokemon {
 
 interface PokePrompt {
   query: string,
-  output: Array<string> | string
+  result: Pokemon | string
 }

@@ -1,26 +1,26 @@
 <script setup lang="ts">
 import { onUpdated, ref, type Ref } from 'vue'
 import pkmn from './pkmn.json'
-import type { PokePrompt, PokeType } from './pkmn.d.ts'
+import type { Pokemon, PokePrompt } from './pkmn.d.ts'
 import { PokeTypes } from './pkmn.ts'
 
 const prompts: Ref<Array<PokePrompt>> = ref([])
 const inputValue = ref('')
 const sectionRef = ref<InstanceType<typeof HTMLDivElement>>()
 
-function getPokeTypes(query: string): Array<string> | undefined {
+function getPokemon(query: string): Pokemon | undefined {
   return pkmn.find((pokemon) => {
     return pokemon.name === query
-  })?.types
+  }) as Pokemon
 }
 
 function onsubmit() {
   if (inputValue.value) {
     const query = inputValue.value.toLowerCase()
-    const types = getPokeTypes(query)
+    const types = getPokemon(query)
     prompts.value.push({
       query: query,
-      output: types || 'no result',
+      result: types || 'no result',
     })
     inputValue.value = ''
   }
@@ -37,30 +37,25 @@ onUpdated(() => {
   <header class="flex">
     <form class="w-full" @submit.prevent="onsubmit">
       <span>Pokedex> </span>
-      <input
-        type="search"
-        autocomplete="off"
-        placeholder="Search Pokedex"
-        class="bg-black"
-        v-model="inputValue"
-      />
+      <input type="search" autocomplete="off" placeholder="Search Pokedex" v-model="inputValue" />
     </form>
   </header>
   <div class="overflow-y-scroll" id="section" ref="sectionRef">
     <template v-for="(prompt, i) in prompts" :key="i">
-      <p v-if="typeof prompt.output === 'string'" class="leading-[14px] h-5">
-        {{ prompt.query }}> {{ prompt.output }}
+      <p v-if="typeof prompt.result === 'string'" class="leading-[14px] h-5">
+        {{ prompt.query }}> {{ prompt.result }}
       </p>
       <p v-else class="flex gap-1 leading-[14px] h-5">
-        {{ prompt.query }}>
-        <template v-for="type in prompt.output" :key="type">
-          <span
+        {{ prompt.result.name.toUpperCase() }}/
+        <template v-for="type in prompt.result.types" :key="type">
+          <button
             :style="{
-              backgroundColor: PokeTypes[type as PokeType].color,
+              backgroundColor: PokeTypes[type].color,
             }"
-            class="text-shadow tracking-tighter px-1 rounded-sm h-[17px]"
-            >{{ PokeTypes[type as PokeType].label }}</span
+            class="text-shadow tracking-tighter px-1 rounded-sm h-[17px] text-white"
           >
+            {{ PokeTypes[type].label }}
+          </button>
         </template>
       </p>
     </template>
