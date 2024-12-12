@@ -1,12 +1,55 @@
 <script setup lang="ts">
 import { onUpdated, ref, type Ref } from 'vue'
 import pkmn from './pkmn.json'
-import type { Pokemon, PokePrompt } from './pkmn.d.ts'
-import { PokeTypes } from './pkmn.ts'
+import { PokeTypes, PokeTypeEffectives } from './pkmn.ts'
+
+type PokeType = keyof typeof PokeTypes
+
+export interface Pokemon {
+  name: string
+  types: PokeType[]
+}
+
+export interface PokePrompt {
+  query: string
+  result: Pokemon | string
+}
 
 const prompts: Ref<Array<PokePrompt>> = ref([])
 const inputValue = ref('')
 const sectionRef = ref<InstanceType<typeof HTMLDivElement>>()
+
+function getTypeEffectiveness(types: Array<PokeType>): Record<number, Array<PokeType>> {
+  const typeEffectiveness = {} as Record<PokeType, number>
+  for (const defenseType of types) {
+    for (const [atkType, defenseTypes] of Object.entries(PokeTypeEffectives)) {
+      const attackType = atkType as PokeType
+      const defenseMul = defenseTypes as Record<PokeType, number>
+      if (defenseType in defenseMul) {
+        if (attackType in typeEffectiveness)
+          typeEffectiveness[attackType] = typeEffectiveness[attackType] * defenseMul[defenseType]
+        else typeEffectiveness[attackType] = defenseMul[defenseType]
+      }
+    }
+  }
+  const typeEffectivenessGroup: Record<number, Array<PokeType>> = {
+    4: [],
+    2: [],
+    1: [],
+    0.5: [],
+    0.25: [],
+    0: [],
+  }
+  for (const type in PokeTypes) {
+    if (type in typeEffectiveness) {
+      const mul = typeEffectiveness[type as PokeType]
+      typeEffectivenessGroup[mul].push(type as PokeType)
+    } else {
+      typeEffectivenessGroup[1].push(type as PokeType)
+    }
+  }
+  return typeEffectivenessGroup
+}
 
 function getPokemon(query: string): Pokemon | undefined {
   return pkmn.find((pokemon) => {
@@ -45,17 +88,34 @@ onUpdated(() => {
       <p v-if="typeof prompt.result === 'string'" class="leading-[14px] h-5">
         {{ prompt.query }}> {{ prompt.result }}
       </p>
-      <p v-else class="flex gap-1 leading-[14px] h-5">
+      <p v-else class="leading-[14px] h-5 inline">
         {{ prompt.result.name.toUpperCase() }}/
         <template v-for="type in prompt.result.types" :key="type">
-          <button
+          <span
             :style="{
               backgroundColor: PokeTypes[type].color,
             }"
-            class="text-shadow tracking-tighter px-1 rounded-sm h-[17px] text-white"
+            class="text-shadow tracking-tighter px-1 rounded-sm h-[17px] text-white mr-1"
           >
             {{ PokeTypes[type].label }}
-          </button>
+          </span> </template
+        >/
+        <template
+          v-for="[multiplier, types] in Object.entries(
+            getTypeEffectiveness(prompt.result.types),
+          ).sort(([a, _], [b, __]) => Number(b) - Number(a))"
+        >
+          Takes {{ multiplier }}x from
+          <template v-for="type in types" :key="type">
+            <span
+              :style="{
+                backgroundColor: PokeTypes[type].color,
+              }"
+              class="text-shadow tracking-tighter px-1 rounded-sm h-[17px] text-white mr-1"
+            >
+              {{ PokeTypes[type].label }}
+            </span>
+          </template>
         </template>
       </p>
     </template>
