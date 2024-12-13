@@ -2358,6 +2358,7 @@
 		"spDefense": 65,
 		"speed": 35,
 		"id": "35",
+		"typesOld": ["normal"],
 		"types": [
 			"fairy"
 		]
@@ -2389,6 +2390,7 @@
 		"spDefense": 90,
 		"speed": 60,
 		"id": "36",
+		"typesOld": ["normal"],
 		"types": [
 			"fairy"
 		]
@@ -2567,6 +2569,9 @@
 		"spDefense": 25,
 		"speed": 20,
 		"id": "39",
+		"typesOld": [
+			"normal"
+		],
 		"types": [
 			"normal",
 			"fairy"
@@ -2599,6 +2604,9 @@
 		"spDefense": 50,
 		"speed": 45,
 		"id": "40",
+		"typesOld": [
+			"normal"
+		],
 		"types": [
 			"normal",
 			"fairy"
@@ -6444,6 +6452,9 @@
 		"spDefense": 120,
 		"speed": 90,
 		"id": "122",
+		"typesOld": [
+			"psychic"
+		],
 		"types": [
 			"psychic",
 			"fairy"
@@ -8721,6 +8732,9 @@
 		"spDefense": 55,
 		"speed": 15,
 		"id": "173",
+		"typesOld": [
+			"normal"
+		],
 		"types": [
 			"fairy"
 		]
@@ -8752,6 +8766,9 @@
 		"spDefense": 20,
 		"speed": 15,
 		"id": "174",
+		"typesOld": [
+			"normal"
+		],
 		"types": [
 			"normal",
 			"fairy"
@@ -8784,6 +8801,9 @@
 		"spDefense": 65,
 		"speed": 20,
 		"id": "175",
+		"typesOld": [
+			"normal"
+		],
 		"types": [
 			"fairy"
 		]
@@ -8815,6 +8835,10 @@
 		"spDefense": 105,
 		"speed": 40,
 		"id": "176",
+		"typesOld": [
+			"normal",
+			"flying"
+		],
 		"types": [
 			"fairy",
 			"flying"
@@ -9078,6 +9102,9 @@
 		"spDefense": 50,
 		"speed": 40,
 		"id": "183",
+		"typesOld": [
+			"water"
+		],
 		"types": [
 			"water",
 			"fairy"
@@ -9110,6 +9137,9 @@
 		"spDefense": 80,
 		"speed": 50,
 		"id": "184",
+		"typesOld": [
+			"water"
+		],
 		"types": [
 			"water",
 			"fairy"
@@ -10029,6 +10059,9 @@
 		"spDefense": 40,
 		"speed": 30,
 		"id": "209",
+		"typesOld": [
+			"normal"
+		],
 		"types": [
 			"fairy"
 		]
@@ -10060,6 +10093,9 @@
 		"spDefense": 60,
 		"speed": 45,
 		"id": "210",
+		"typesOld": [
+			"normal"
+		],
 		"types": [
 			"fairy"
 		]
@@ -12772,6 +12808,9 @@
 		"spDefense": 35,
 		"speed": 40,
 		"id": "280",
+		"typesOld": [
+			"psychic"
+		],
 		"types": [
 			"psychic",
 			"fairy"
@@ -12804,6 +12843,9 @@
 		"spDefense": 55,
 		"speed": 50,
 		"id": "281",
+		"typesOld": [
+			"psychic"
+		],
 		"types": [
 			"psychic",
 			"fairy"
@@ -12836,6 +12878,9 @@
 		"spDefense": 115,
 		"speed": 80,
 		"id": "282",
+		"typesOld": [
+			"psychic"
+		],
 		"types": [
 			"psychic",
 			"fairy"
@@ -13382,6 +13427,9 @@
 		"spDefense": 40,
 		"speed": 20,
 		"id": "298",
+		"typesOld": [
+			"normal"
+		],
 		"types": [
 			"normal",
 			"fairy"
@@ -13582,6 +13630,9 @@
 		"spDefense": 55,
 		"speed": 50,
 		"id": "303",
+		"typesOld": [
+			"steel"
+		],
 		"types": [
 			"steel",
 			"fairy"
@@ -19062,6 +19113,9 @@
 		"spDefense": 90,
 		"speed": 60,
 		"id": "439",
+		"typesOld": [
+			"psychic"
+		],
 		"types": [
 			"psychic",
 			"fairy"
@@ -20107,6 +20161,10 @@
 		"spDefense": 115,
 		"speed": 80,
 		"id": "468",
+		"typesOld": [
+			"normal",
+			"flying"
+		],
 		"types": [
 			"fairy",
 			"flying"
@@ -23095,6 +23153,9 @@
 		"spDefense": 50,
 		"speed": 66,
 		"id": "546",
+		"typesOld": [
+			"grass"
+		],
 		"types": [
 			"grass",
 			"fairy"
@@ -23127,6 +23188,9 @@
 		"spDefense": 75,
 		"speed": 116,
 		"id": "547",
+		"typesOld": [
+			"grass"
+		],
 		"types": [
 			"grass",
 			"fairy"
