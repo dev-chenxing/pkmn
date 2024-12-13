@@ -301,43 +301,49 @@ onUpdated(() => {
   <header class="flex">
     <form class="w-full" @submit.prevent="onsubmit">
       <span>Pokedex Emerald> </span>
-      <input type="search" autocomplete="off" placeholder="Search Pokedex" v-model="inputValue" />
+      <input
+        type="search"
+        class="bg-white"
+        autocomplete="off"
+        placeholder="Search Pokedex"
+        v-model="inputValue"
+      />
     </form>
   </header>
   <div class="overflow-y-scroll" id="section" ref="sectionRef">
     <template v-for="(prompt, i) in prompts" :key="i">
-      <p v-if="typeof prompt.result === 'string'" class="leading-[22x] h-5">
+      <p v-if="typeof prompt.result === 'string'" class="leading-[22px]">
         {{ prompt.query }}> {{ prompt.result }}
       </p>
-      <p v-else class="leading-[22x] h-5 inline-block">
+      <p v-else class="leading-[22px] inline-block">
         {{ prompt.result.name.toUpperCase() }}/
-        <template v-for="type in prompt.result.types" :key="type">
-          <span
-            :style="{
-              backgroundColor: PokeTypes[type].color,
-            }"
-            class="text-shadow tracking-tighter px-1 rounded-sm h-[17px] text-white mr-1"
-          >
-            {{ PokeTypes[type].label }}
-          </span> </template
-        >/
+        <span
+          v-for="type in prompt.result.types"
+          :key="type"
+          :style="{
+            backgroundColor: PokeTypes[type].color,
+          }"
+          class="text-shadow tracking-tighter px-1 rounded-sm h-[17px] leading-[17px] text-white mr-1 inline-block"
+        >
+          {{ PokeTypes[type].label }}
+        </span>
         <template
           v-for="[multiplier, types] in Object.entries(
             getTypeEffectiveness(prompt.result.types),
           ).sort(([a, _], [b, __]) => Number(b) - Number(a))"
         >
-          <template v-if="types.length > 0">
-            Takes {{ multiplier }}x from
-            <template v-for="type in types" :key="type">
-              <span
-                :style="{
-                  backgroundColor: PokeTypes[type].color,
-                }"
-                class="text-shadow tracking-tighter px-1 rounded-sm h-[17px] text-white mr-1"
-              >
-                {{ PokeTypes[type].label }}
-              </span>
-            </template>
+          <template v-if="types.length > 0"
+            >/ Takes {{ multiplier }}x from
+            <span
+              v-for="type in types"
+              :key="type"
+              :style="{
+                backgroundColor: PokeTypes[type].color,
+              }"
+              class="text-shadow tracking-tighter px-1 rounded-sm h-[17px] leading-[17px] text-white mr-1 inline-block"
+            >
+              {{ PokeTypes[type].label }}
+            </span>
           </template>
         </template>
       </p>
