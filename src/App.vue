@@ -346,15 +346,12 @@ onUpdated(() => {
 </template>
 
 <style>
-#section {
-  height: calc(100% - 24px);
-}
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: Consolas;
+  font-family: 'Ubuntu Mono';
   font-size: 16px;
   max-height: 100vh;
 }
@@ -367,5 +364,9 @@ body {
 
 input:focus-visible {
   outline: none;
+}
+
+#section {
+  height: calc(100% - 24px);
 }
 </style>
