@@ -303,7 +303,7 @@ onUpdated(() => {
       <span>Pokedex Emerald> </span>
       <input
         type="search"
-        class="bg-white"
+        class="bg-white caret-black"
         autocomplete="off"
         placeholder="Search Pokedex"
         v-model="inputValue"
