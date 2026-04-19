@@ -10,7 +10,7 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "lint": "oxlint . --fix",
-    "format": "prettier --write src/",
+    "format": "oxfmt . --write",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {

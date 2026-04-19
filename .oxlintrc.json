@@ -1,10 +1,6 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": [
-    "vue",
-    "typescript",
-    "unicorn"
-  ],
+  "plugins": ["vue", "typescript", "unicorn"],
   "categories": {
     "correctness": "off"
   },
@@ -778,11 +774,7 @@
     "XRWebGLLayer": "readonly",
     "XSLTProcessor": "readonly"
   },
-  "ignorePatterns": [
-    "**/dist/**",
-    "**/dist-ssr/**",
-    "**/coverage/**"
-  ],
+  "ignorePatterns": ["**/dist/**", "**/dist-ssr/**", "**/coverage/**"],
   "rules": {
     "vue/no-arrow-functions-in-watch": "error",
     "vue/no-deprecated-destroyed-lifecycle": "error",
@@ -814,10 +806,7 @@
   },
   "overrides": [
     {
-      "files": [
-        "*.vue",
-        "**/*.vue"
-      ],
+      "files": ["*.vue", "**/*.vue"],
       "globals": {
         "AbortController": "readonly",
         "AbortSignal": "readonly",
@@ -1585,13 +1574,7 @@
       }
     },
     {
-      "files": [
-        "**/*.ts",
-        "**/*.tsx",
-        "**/*.mts",
-        "**/*.cts",
-        "**/*.vue"
-      ],
+      "files": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts", "**/*.vue"],
       "rules": {
         "constructor-super": "off",
         "no-class-assign": "off",
@@ -1613,10 +1596,7 @@
       }
     },
     {
-      "files": [
-        "*.vue",
-        "**/*.vue"
-      ],
+      "files": ["*.vue", "**/*.vue"],
       "globals": {
         "AbortController": "readonly",
         "AbortSignal": "readonly",
@@ -2384,12 +2364,7 @@
       }
     },
     {
-      "files": [
-        "**/*.js",
-        "**/*.jsx",
-        "**/*.cjs",
-        "**/*.mjs"
-      ],
+      "files": ["**/*.js", "**/*.jsx", "**/*.cjs", "**/*.mjs"],
       "rules": {
         "typescript/await-thenable": "off",
         "typescript/consistent-return": "off",

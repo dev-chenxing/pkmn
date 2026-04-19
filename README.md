@@ -25,12 +25,11 @@ Open `http://localhost:5173` and type a Pokémon name at the prompt (e.g. `chari
 
 ## Scripts
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Start the dev server |
-| `npm run build` | Type-check and build for production |
-| `npm run preview` | Preview the production build |
-| `npm run lint` | Lint and auto-fix |
-| `npm run format` | Format source files with Prettier |
-| `npm run deploy` | Deploy to GitHub Pages |
-
+| Command           | Description                         |
+| ----------------- | ----------------------------------- |
+| `npm run dev`     | Start the dev server                |
+| `npm run build`   | Type-check and build for production |
+| `npm run preview` | Preview the production build        |
+| `npm run lint`    | Lint and auto-fix                   |
+| `npm run format`  | Format source files with Prettier   |
+| `npm run deploy`  | Deploy to GitHub Pages              |
