@@ -9,35 +9,26 @@
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
-    "lint": "eslint . --fix",
+    "lint": "oxlint . --fix",
     "format": "prettier --write src/",
-    "deploy": "gh-pages -d dist",
-    "test:safari": "npx playwright test --headed --browser=webkit",
-    "test:chrome": "npx playwright test --headed --browser=chromium",
-    "test:firefox": "npx playwright test --headed --browser=firefox"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "vue": "^3.5.13"
+    "vue": "^3.5.32"
   },
   "devDependencies": {
-    "@playwright/test": "^1.49.1",
-    "@tsconfig/node22": "^22.0.0",
-    "@types/node": "^22.9.3",
-    "@vitejs/plugin-vue": "^5.2.1",
-    "@vue/eslint-config-prettier": "^10.1.0",
-    "@vue/eslint-config-typescript": "^14.1.3",
-    "@vue/tsconfig": "^0.7.0",
+    "@tsconfig/node24": "^24.0.4",
+    "@types/node": "^24.12.2",
+    "@vitejs/plugin-vue": "^6.0.6",
+    "@vue/tsconfig": "^0.9.1",
     "autoprefixer": "^10.4.20",
-    "eslint": "^9.14.0",
-    "eslint-plugin-vue": "^9.30.0",
-    "gh-pages": "^6.2.0",
-    "npm-run-all2": "^7.0.1",
+    "gh-pages": "^6.3.0",
+    "oxfmt": "^0.45.0",
+    "oxlint": "^1.60.0",
     "postcss": "^8.4.49",
-    "prettier": "^3.3.3",
     "tailwindcss": "^3.4.16",
-    "typescript": "~5.6.3",
-    "vite": "^6.0.1",
-    "vite-plugin-vue-devtools": "^7.6.5",
-    "vue-tsc": "^2.1.10"
+    "typescript": "^6.0.3",
+    "vite": "^8.0.8",
+    "vue-tsc": "^3.2.7"
   }
 }
