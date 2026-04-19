@@ -6,7 +6,8 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/pkmn',
+  // Use root base for deployment to a custom domain (pkmn.chenxing.dev)
+  base: '/',
   plugins: [vue(), tailwindcss()],
   resolve: {
     alias: {
