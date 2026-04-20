@@ -100,12 +100,12 @@ onUpdated(() => {
 <template>
   <header class="flex">
     <form class="w-full" @submit.prevent="onsubmit">
-      <span>Pokedex Emerald> </span>
+      <span>Pokédex > </span>
       <input
         type="search"
         class="bg-white caret-black"
         autocomplete="off"
-        placeholder="Search Pokedex"
+        placeholder="Search Pokédex"
         v-model="inputValue"
       />
     </form>
