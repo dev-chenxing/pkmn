@@ -20,6 +20,14 @@ const prompts: Ref<Array<PokePrompt>> = ref([])
 const inputValue = ref('')
 const sectionRef = ref<InstanceType<typeof HTMLDivElement>>()
 
+function normalizeBaseName(value: string): string {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[♀♂]/g, '') // remove gender symbols
+    .replace(/\s+/g, ' ') // replace multiple spaces with a single space
+}
+
 function getTypeEffectiveness(types: Array<PokeType>): Record<number, Array<PokeType>> {
   const typeEffectiveness = {} as Record<PokeType, number>
   for (const defenseType of types) {
@@ -54,11 +62,19 @@ function getTypeEffectiveness(types: Array<PokeType>): Record<number, Array<Poke
 
 function getPokemon(query: string): Pokemon | undefined {
   const normalizedQuery = query.trim().toLowerCase()
+  const normalizedBaseQuery = normalizeBaseName(query)
+
+  const exactMatch = pkmn.find((pokemon) => {
+    const normalizedName = pokemon.name.toLowerCase()
+    const normalizedSpeciesName = pokemon.speciesNames.en.toLowerCase()
+    return normalizedName === normalizedQuery || normalizedSpeciesName === normalizedQuery
+  }) as Pokemon
+
+  if (exactMatch) return exactMatch
+
   return pkmn.find((pokemon) => {
-    return (
-      pokemon.name.toLowerCase() === normalizedQuery ||
-      pokemon.speciesNames.en.toLowerCase() === normalizedQuery
-    )
+    const normalizedSpeciesName = pokemon.speciesNames.en.toLowerCase()
+    return normalizeBaseName(normalizedSpeciesName) === normalizedBaseQuery
   }) as Pokemon
 }
 
