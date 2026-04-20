@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onUpdated, ref, type Ref } from 'vue'
+import { ref, type Ref } from 'vue'
 import pkmn from './pkmn.json'
 import { PokeTypeEffectives, PokeTypes, type PokeType } from './poke-types'
 
@@ -18,7 +18,6 @@ export interface PokePrompt {
 
 const prompts: Ref<Array<PokePrompt>> = ref([])
 const inputValue = ref('')
-const sectionRef = ref<InstanceType<typeof HTMLDivElement>>()
 
 function normalizeBaseName(value: string): string {
   return value
@@ -89,65 +88,63 @@ function onsubmit() {
     inputValue.value = ''
   }
 }
-
-onUpdated(() => {
-  if (sectionRef.value) {
-    sectionRef.value.scrollTop = sectionRef.value.scrollHeight
-  }
-})
 </script>
 
 <template>
-  <header class="flex">
+  <div
+    class="h-6 border-b-3 border-black bg-[linear-gradient(90deg,#7e0f0f_0%,#7e0f0f_4%,#a81818_4%,#a81818_6%,#c91f1f_6%,#c91f1f_94%,#a81818_94%,#a81818_96%,#7e0f0f_96%,#7e0f0f_100%)]"
+    aria-hidden="true"
+  ></div>
+  <div class="flex min-h-0 flex-1 flex-col mx-2">
     <form class="w-full" @submit.prevent="onsubmit">
       <span>Pokédex > </span>
       <input
         type="search"
-        class="bg-white caret-black"
+        class="bg-white caret-black focus-visible:outline-none"
         autocomplete="off"
         placeholder="Search Pokédex"
         v-model="inputValue"
       />
     </form>
-  </header>
-  <div class="overflow-y-scroll" id="section" ref="sectionRef">
-    <template v-for="(prompt, i) in prompts.slice().reverse()" :key="i">
-      <p v-if="typeof prompt.result === 'string'" class="leading-[22px]">
-        {{ prompt.query }}> {{ prompt.result }}
-      </p>
-      <p v-else class="leading-[22px] inline-block">
-        {{ prompt.result.name.toUpperCase() }}/
-        <span
-          v-for="type in prompt.result.types"
-          :key="type"
-          :style="{
-            backgroundColor: PokeTypes[type].color,
-          }"
-          class="text-shadow tracking-tighter px-1 rounded-sm h-[17px] leading-[17px] text-white mr-1 inline-block"
-        >
-          {{ PokeTypes[type].label }}
-        </span>
-        <template
-          v-for="[multiplier, types] in Object.entries(
-            getTypeEffectiveness(prompt.result.types),
-          ).sort(([a, _], [b, __]) => Number(b) - Number(a))"
-        >
-          <template v-if="types.length > 0"
-            >/ Takes {{ multiplier }}x from
-            <span
-              v-for="type in types"
-              :key="type"
-              :style="{
-                backgroundColor: PokeTypes[type].color,
-              }"
-              class="text-shadow tracking-tighter px-1 rounded-sm h-[17px] leading-[17px] text-white mr-1 inline-block"
-            >
-              {{ PokeTypes[type].label }}
-            </span>
+    <div class="overflow-y-scroll flex-1 min-h-0">
+      <template v-for="(prompt, i) in prompts.slice().reverse()" :key="i">
+        <p v-if="typeof prompt.result === 'string'" class="leading-[22px]">
+          {{ prompt.query }}> {{ prompt.result }}
+        </p>
+        <p v-else class="leading-[22px] inline-block">
+          {{ prompt.result.name.toUpperCase() }}/
+          <span
+            v-for="type in prompt.result.types"
+            :key="type"
+            :style="{
+              backgroundColor: PokeTypes[type].color,
+            }"
+            class="text-shadow tracking-tighter px-1 rounded-sm h-[17px] leading-[17px] text-white mr-1 inline-block"
+          >
+            {{ PokeTypes[type].label }}
+          </span>
+          <template
+            v-for="[multiplier, types] in Object.entries(
+              getTypeEffectiveness(prompt.result.types),
+            ).sort(([a, _], [b, __]) => Number(b) - Number(a))"
+          >
+            <template v-if="types.length > 0"
+              >/ Takes {{ multiplier }}x from
+              <span
+                v-for="type in types"
+                :key="type"
+                :style="{
+                  backgroundColor: PokeTypes[type].color,
+                }"
+                class="text-shadow tracking-tighter px-1 rounded-sm h-[17px] leading-[17px] text-white mr-1 inline-block"
+              >
+                {{ PokeTypes[type].label }}
+              </span>
+            </template>
           </template>
-        </template>
-      </p>
-    </template>
+        </p>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -159,20 +156,13 @@ onUpdated(() => {
 body {
   font-family: 'Ubuntu Mono';
   font-size: 16px;
-  max-height: 100vh;
+  max-height: 100dvh;
 }
 
 #app {
-  padding: 4px 8px;
+  display: flex;
+  flex-direction: column;
   overflow: clip;
-  height: 100vh;
-}
-
-input:focus-visible {
-  outline: none;
-}
-
-#section {
-  height: calc(100% - 24px);
+  height: 100dvh;
 }
 </style>
