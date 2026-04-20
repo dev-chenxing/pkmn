@@ -111,7 +111,7 @@ onUpdated(() => {
     </form>
   </header>
   <div class="overflow-y-scroll" id="section" ref="sectionRef">
-    <template v-for="(prompt, i) in prompts" :key="i">
+    <template v-for="(prompt, i) in prompts.slice().reverse()" :key="i">
       <p v-if="typeof prompt.result === 'string'" class="leading-[22px]">
         {{ prompt.query }}> {{ prompt.result }}
       </p>
