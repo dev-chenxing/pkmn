@@ -6,6 +6,9 @@ import { PokeTypeEffectives, PokeTypes, type PokeType } from './poke-types'
 export interface Pokemon {
   name: string
   types: PokeType[]
+  speciesNames: {
+    en: string
+  }
 }
 
 export interface PokePrompt {
@@ -50,8 +53,12 @@ function getTypeEffectiveness(types: Array<PokeType>): Record<number, Array<Poke
 }
 
 function getPokemon(query: string): Pokemon | undefined {
+  const normalizedQuery = query.trim().toLowerCase()
   return pkmn.find((pokemon) => {
-    return pokemon.name === query
+    return (
+      pokemon.name.toLowerCase() === normalizedQuery ||
+      pokemon.speciesNames.en.toLowerCase() === normalizedQuery
+    )
   }) as Pokemon
 }
 

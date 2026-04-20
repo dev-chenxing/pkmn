@@ -4,6 +4,9 @@ interface Pokemon {
   name: string
   types: string[]
   typesOld?: string[]
+  speciesNames: {
+    en: string
+  }
 }
 
 function loadJson(filename: string): unknown {
@@ -20,8 +23,18 @@ pokeapi.forEach((pkmon) => {
   if (!pkmon.name.includes('-alola'))
     if (!pkmon.name.includes('-galar'))
       if (!pkmon.name.includes('-mega')) {
-        if (pkmon.typesOld) pkmn.push({ name: pkmon.name, types: pkmon.typesOld })
-        else if (!pkmon.types.includes('fairy')) pkmn.push({ name: pkmon.name, types: pkmon.types })
+        if (pkmon.typesOld)
+          pkmn.push({
+            name: pkmon.name,
+            types: pkmon.typesOld,
+            speciesNames: { en: pkmon.speciesNames.en },
+          })
+        else if (!pkmon.types.includes('fairy'))
+          pkmn.push({
+            name: pkmon.name,
+            types: pkmon.types,
+            speciesNames: { en: pkmon.speciesNames.en },
+          })
       }
 })
 saveJson('src/pkmn.json', pkmn)
